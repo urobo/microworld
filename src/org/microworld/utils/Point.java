@@ -5,15 +5,15 @@ package org.microworld.utils;
 
 /**
  * @author riccardo
- *
+ * 
  */
 public class Point {
 	private double lat = 0;
 	private double lng = 0;
-	
+
 	private String GeoRSSPoint;
-	
-	public Point (double lat,double lng){
+
+	public Point(double lat, double lng) {
 		this.lat = lat;
 		this.lng = lng;
 		this.GeoRSSPoint = lat + " " + lng;
@@ -27,7 +27,8 @@ public class Point {
 	}
 
 	/**
-	 * @param lat the lat to set
+	 * @param lat
+	 *            the lat to set
 	 */
 	public void setLat(double lat) {
 		this.lat = lat;
@@ -41,7 +42,8 @@ public class Point {
 	}
 
 	/**
-	 * @param lng the lng to set
+	 * @param lng
+	 *            the lng to set
 	 */
 	public void setLng(double lng) {
 		this.lng = lng;
@@ -55,7 +57,8 @@ public class Point {
 	}
 
 	/**
-	 * @param geoRSSPoint the geoRSSPoint to set
+	 * @param geoRSSPoint
+	 *            the geoRSSPoint to set
 	 */
 	public void setGeoRSSPoint(String geoRSSPoint) {
 		GeoRSSPoint = geoRSSPoint;

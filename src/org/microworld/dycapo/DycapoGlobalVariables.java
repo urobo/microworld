@@ -5,7 +5,7 @@ package org.microworld.dycapo;
 
 /**
  * @author riccardo
- *
+ * 
  */
 public abstract class DycapoGlobalVariables {
 	public static final String URL_BASIS = "http://test.dycapo.org/api/";

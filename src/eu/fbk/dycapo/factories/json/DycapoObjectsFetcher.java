@@ -23,7 +23,6 @@ public abstract class DycapoObjectsFetcher {
 
 	public static final String HREF = "href";
 
-
 	/**
 	 * @param jsonArray
 	 * @return
@@ -71,7 +70,6 @@ public abstract class DycapoObjectsFetcher {
 		return ModeFetcher.fetchMode(responseValue);
 	}
 
-	
 	/**
 	 * @param responseValue
 	 * @return

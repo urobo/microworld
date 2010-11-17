@@ -10,22 +10,23 @@ import org.microworld.utils.Point;
 
 /**
  * @author riccardo
- *
+ * 
  */
 public class Robot implements BehaviorManager {
 	private List<Point> list;
 	private int currentPoint = -1;
-	
-	public Robot (){
+
+	public Robot() {
 		this.list = new ArrayList<Point>();
 	}
-	public Robot (List<Point> path){
+
+	public Robot(List<Point> path) {
 		this.setList(path);
 	}
 
 	@Override
 	public String getNextPoint() {
-		if (this.list != null && (!this.list.isEmpty())){
+		if (this.list != null && (!this.list.isEmpty())) {
 			this.currentPoint++;
 			return this.list.get(currentPoint).toGeoRSSPoint();
 		}
@@ -39,9 +40,10 @@ public class Robot implements BehaviorManager {
 
 	@Override
 	public boolean hasNext() {
-		if(this.currentPoint < this.list.size()-1)
+		if (this.currentPoint < this.list.size() - 1)
 			return true;
-		else return false;
+		else
+			return false;
 	}
 
 	@Override
@@ -50,7 +52,8 @@ public class Robot implements BehaviorManager {
 	}
 
 	/**
-	 * @param list the list to set
+	 * @param list
+	 *            the list to set
 	 */
 	protected void setList(List<Point> list) {
 		this.list = list;
@@ -62,7 +65,7 @@ public class Robot implements BehaviorManager {
 	protected List<Point> getList() {
 		return list;
 	}
-	
+
 	@Override
 	public int pointsLeft() {
 		return this.list.size() - this.currentPoint;

@@ -393,7 +393,8 @@ public class Person implements DycapoJSONObjects {
 	}
 
 	/**
-	 * @param password the password to set
+	 * @param password
+	 *            the password to set
 	 */
 	public void setPassword(String password) {
 		this.password = password;

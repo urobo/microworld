@@ -3,7 +3,6 @@
  */
 package org.microworld.dycapo;
 
-
 /**
  * @author riccardo
  * 
@@ -15,8 +14,9 @@ public class Main {
 
 	public static void main(String[] args) {
 
-//		DycapoHttpClient.callDycapo(DycapoHttpClient.GET, URL, null, USERNAME,
-//				PASSWORD);
+		// DycapoHttpClient.callDycapo(DycapoHttpClient.GET, URL, null,
+		// USERNAME,
+		// PASSWORD);
 
 	}
 }

@@ -12,13 +12,19 @@ import org.microworld.models.Trip;
 
 /**
  * @author riccardo
- *
+ * 
  */
 public interface Rider {
 	Search searchTrip(Location origin, Location destination, Person Author);
+
 	boolean finishParticipation();
-	Participation postParticipation(Participation participation, Trip trip) throws JSONException;
+
+	Participation postParticipation(Participation participation, Trip trip)
+			throws JSONException;
+
 	String checkParticipationStatus() throws JSONException;
+
 	boolean cancelParticipation();
+
 	boolean startParticipation();
 }

@@ -12,11 +12,14 @@ import org.microworld.models.Trip;
 
 /**
  * @author riccardo
- *
+ * 
  */
 public interface DycapoUser {
 	public void updatePosition(Location position);
+
 	public Location getPosition(Person person);
+
 	public List<Participation> getParticipations(Trip trip);
+
 	public void makeDecision(int runLevel);
 }
