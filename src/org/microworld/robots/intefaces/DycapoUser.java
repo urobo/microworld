@@ -20,7 +20,4 @@ public interface DycapoUser {
 	public void postParticipation(Participation participation);
 	public List<Participation> getParticipations(Trip trip);
 	public void makeDecision(int runLevel);
-	public static void main(String[] args) {
-		marco.frassoni@gmail.com
-	}
 }
