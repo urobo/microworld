@@ -23,10 +23,10 @@ public abstract class DycapoObjectsFetcher {
 
 	public static final String HREF = "href";
 
+
 	/**
 	 * @param jsonArray
 	 * @return
-	 * @throws DycapoException
 	 */
 	public static final List<Person> extractPersons(JSONArray jsonArray) {
 
@@ -36,7 +36,6 @@ public abstract class DycapoObjectsFetcher {
 	/**
 	 * @param responseValue
 	 * @return
-	 * @throws DycapoException
 	 */
 	public static final Trip buildTrip(JSONObject responseValue) {
 		return TripFetcher.fetchTrip(responseValue);
@@ -72,10 +71,10 @@ public abstract class DycapoObjectsFetcher {
 		return ModeFetcher.fetchMode(responseValue);
 	}
 
+	
 	/**
 	 * @param responseValue
 	 * @return
-	 * @throws DycapoException
 	 */
 	public static final Participation buildParticipation(
 			JSONObject responseValue) {
