@@ -17,7 +17,6 @@ import org.microworld.models.Trip;
 public interface DycapoUser {
 	public void updatePosition(Location position);
 	public Location getPosition(Person person);
-	public void postParticipation(Participation participation);
 	public List<Participation> getParticipations(Trip trip);
 	public void makeDecision(int runLevel);
 }

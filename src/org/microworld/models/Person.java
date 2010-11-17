@@ -33,6 +33,7 @@ public class Person implements DycapoJSONObjects {
 	public static final String HREF = "href";
 
 	private String username = null; // must
+	private String password = null;
 	private String email = null; // may
 	private String first_name = null; // should
 	private String last_name = null; // should
@@ -389,6 +390,20 @@ public class Person implements DycapoJSONObjects {
 		if (this.username instanceof java.lang.String)
 			out += (USERNAME + " : " + this.username);
 		return out.toString();
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
 	}
 
 }

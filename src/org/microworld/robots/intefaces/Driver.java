@@ -13,10 +13,10 @@ import org.microworld.models.Trip;
  *
  */
 public interface Driver {
-	public Trip postTrip(Trip trip);
-	public boolean activateTrip(Trip trip);
-	public List<Participation> checkRideRequests(Trip trip);
-	public void acceptRideRequest(Participation participation, Trip trip);
-	public void refuseRideRequest(Participation participation, Trip trip);
-	public void finishTrip(Trip trip);
+	Trip postTrip(Trip trip);
+	boolean activateTrip(Trip trip);
+	boolean finishTrip(Trip trip);
+	List<Participation> checkRideRequests(Trip trip);
+	void acceptRideRequests(List<Participation> list);
+	void refuseRideRequests(List<Participation> list);
 }
