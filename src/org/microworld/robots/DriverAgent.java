@@ -123,8 +123,7 @@ public class DriverAgent extends Agent implements Driver {
 	public void setModality(Mode modality) {
 		this.modality = modality;
 	}
-	
-	
+
 	/**
 	 * @return the modality
 	 */
@@ -135,25 +134,25 @@ public class DriverAgent extends Agent implements Driver {
 	@Override
 	public void runLevelDecision0() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void runLevelDecision1() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void runLevelDecision2() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void runLevelDecision3() {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 }

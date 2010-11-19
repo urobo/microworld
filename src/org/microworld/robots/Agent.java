@@ -22,17 +22,18 @@ import eu.fbk.dycapo.factories.json.DycapoObjectsFetcher;
  * @author riccardo
  * 
  */
-public abstract class Agent extends Role implements Runnable, DycapoUser,RunLevelDecisions {
+public abstract class Agent extends Role implements Runnable, DycapoUser,
+		RunLevelDecisions {
 
 	protected Robot path;
 	protected Person user;
 	protected Trip trip;
 	protected double acceptanceRate;
-	
-	
+
 	public Agent(double rate) {
 		this.acceptanceRate = rate;
 	}
+
 	/**
 	 * @return the path
 	 */
@@ -41,7 +42,8 @@ public abstract class Agent extends Role implements Runnable, DycapoUser,RunLeve
 	}
 
 	/**
-	 * @param path the path to set
+	 * @param path
+	 *            the path to set
 	 */
 	public void setPath(Robot path) {
 		this.path = path;
@@ -55,7 +57,8 @@ public abstract class Agent extends Role implements Runnable, DycapoUser,RunLeve
 	}
 
 	/**
-	 * @param user the user to set
+	 * @param user
+	 *            the user to set
 	 */
 	public void setUser(Person user) {
 		this.user = user;
@@ -69,7 +72,8 @@ public abstract class Agent extends Role implements Runnable, DycapoUser,RunLeve
 	}
 
 	/**
-	 * @param trip the trip to set
+	 * @param trip
+	 *            the trip to set
 	 */
 	public void setTrip(Trip trip) {
 		this.trip = trip;
@@ -83,7 +87,8 @@ public abstract class Agent extends Role implements Runnable, DycapoUser,RunLeve
 	}
 
 	/**
-	 * @param acceptanceRate the acceptanceRate to set
+	 * @param acceptanceRate
+	 *            the acceptanceRate to set
 	 */
 	public void setAcceptanceRate(double acceptanceRate) {
 		this.acceptanceRate = acceptanceRate;
@@ -148,44 +153,63 @@ public abstract class Agent extends Role implements Runnable, DycapoUser,RunLeve
 		}
 		return null;
 	}
-	/* (non-Javadoc)
-	 * @see org.microworld.robots.intefaces.RunLevelDecisions#runLevelDecision0()
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.microworld.robots.intefaces.RunLevelDecisions#runLevelDecision0()
 	 */
 	@Override
 	public void runLevelDecision0() {
 		// TODO Auto-generated method stub
-		
+
 	}
-	/* (non-Javadoc)
-	 * @see org.microworld.robots.intefaces.RunLevelDecisions#runLevelDecision1()
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.microworld.robots.intefaces.RunLevelDecisions#runLevelDecision1()
 	 */
 	@Override
 	public void runLevelDecision1() {
 		// TODO Auto-generated method stub
-		
+
 	}
-	/* (non-Javadoc)
-	 * @see org.microworld.robots.intefaces.RunLevelDecisions#runLevelDecision2()
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.microworld.robots.intefaces.RunLevelDecisions#runLevelDecision2()
 	 */
 	@Override
 	public void runLevelDecision2() {
 		// TODO Auto-generated method stub
-		
+
 	}
-	/* (non-Javadoc)
-	 * @see org.microworld.robots.intefaces.RunLevelDecisions#runLevelDecision3()
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.microworld.robots.intefaces.RunLevelDecisions#runLevelDecision3()
 	 */
 	@Override
 	public void runLevelDecision3() {
 		// TODO Auto-generated method stub
-		
+
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.microworld.robots.intefaces.DycapoUser#makeDecision(int)
 	 */
 	@Override
 	public void makeDecision(int runLevel) {
-		switch (runLevel){
+		switch (runLevel) {
 		case 0:
 			runLevelDecision0();
 			break;
@@ -200,12 +224,15 @@ public abstract class Agent extends Role implements Runnable, DycapoUser,RunLeve
 			break;
 		}
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Runnable#run()
 	 */
 	@Override
 	public void run() {
-		while (true){
+		while (true) {
 			try {
 				makeDecision(this.runlevel);
 				Thread.sleep(1000);
@@ -216,7 +243,3 @@ public abstract class Agent extends Role implements Runnable, DycapoUser,RunLeve
 		}
 	}
 }
-	
-	
-
-

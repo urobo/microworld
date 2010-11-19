@@ -136,25 +136,25 @@ public class RiderAgent extends Agent implements Rider {
 	@Override
 	public void runLevelDecision0() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void runLevelDecision1() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void runLevelDecision2() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void runLevelDecision3() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
