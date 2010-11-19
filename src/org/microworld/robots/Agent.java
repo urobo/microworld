@@ -14,6 +14,7 @@ import org.microworld.models.Participation;
 import org.microworld.models.Person;
 import org.microworld.models.Trip;
 import org.microworld.robots.intefaces.DycapoUser;
+import org.microworld.robots.intefaces.RunLevelDecisions;
 
 import eu.fbk.dycapo.factories.json.DycapoObjectsFetcher;
 
@@ -21,11 +22,72 @@ import eu.fbk.dycapo.factories.json.DycapoObjectsFetcher;
  * @author riccardo
  * 
  */
-public abstract class Agent extends Role implements Runnable, DycapoUser {
+public abstract class Agent extends Role implements Runnable, DycapoUser,RunLevelDecisions {
 
 	protected Robot path;
 	protected Person user;
 	protected Trip trip;
+	protected double acceptanceRate;
+	
+	
+	public Agent(double rate) {
+		this.acceptanceRate = rate;
+	}
+	/**
+	 * @return the path
+	 */
+	public Robot getPath() {
+		return path;
+	}
+
+	/**
+	 * @param path the path to set
+	 */
+	public void setPath(Robot path) {
+		this.path = path;
+	}
+
+	/**
+	 * @return the user
+	 */
+	public Person getUser() {
+		return user;
+	}
+
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(Person user) {
+		this.user = user;
+	}
+
+	/**
+	 * @return the trip
+	 */
+	public Trip getTrip() {
+		return trip;
+	}
+
+	/**
+	 * @param trip the trip to set
+	 */
+	public void setTrip(Trip trip) {
+		this.trip = trip;
+	}
+
+	/**
+	 * @return the acceptanceRate
+	 */
+	public double getAcceptanceRate() {
+		return acceptanceRate;
+	}
+
+	/**
+	 * @param acceptanceRate the acceptanceRate to set
+	 */
+	public void setAcceptanceRate(double acceptanceRate) {
+		this.acceptanceRate = acceptanceRate;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -86,5 +148,75 @@ public abstract class Agent extends Role implements Runnable, DycapoUser {
 		}
 		return null;
 	}
-
+	/* (non-Javadoc)
+	 * @see org.microworld.robots.intefaces.RunLevelDecisions#runLevelDecision0()
+	 */
+	@Override
+	public void runLevelDecision0() {
+		// TODO Auto-generated method stub
+		
+	}
+	/* (non-Javadoc)
+	 * @see org.microworld.robots.intefaces.RunLevelDecisions#runLevelDecision1()
+	 */
+	@Override
+	public void runLevelDecision1() {
+		// TODO Auto-generated method stub
+		
+	}
+	/* (non-Javadoc)
+	 * @see org.microworld.robots.intefaces.RunLevelDecisions#runLevelDecision2()
+	 */
+	@Override
+	public void runLevelDecision2() {
+		// TODO Auto-generated method stub
+		
+	}
+	/* (non-Javadoc)
+	 * @see org.microworld.robots.intefaces.RunLevelDecisions#runLevelDecision3()
+	 */
+	@Override
+	public void runLevelDecision3() {
+		// TODO Auto-generated method stub
+		
+	}
+	/* (non-Javadoc)
+	 * @see org.microworld.robots.intefaces.DycapoUser#makeDecision(int)
+	 */
+	@Override
+	public void makeDecision(int runLevel) {
+		switch (runLevel){
+		case 0:
+			runLevelDecision0();
+			break;
+		case 1:
+			runLevelDecision1();
+			break;
+		case 2:
+			runLevelDecision2();
+			break;
+		case 3:
+			runLevelDecision3();
+			break;
+		}
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
+	@Override
+	public void run() {
+		while (true){
+			try {
+				makeDecision(this.runlevel);
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 }
+	
+	
+
+

@@ -22,16 +22,14 @@ import eu.fbk.dycapo.factories.json.DycapoObjectsFetcher;
  * 
  */
 public class DriverAgent extends Agent implements Driver {
+	public DriverAgent(double rate) {
+		super(rate);
+	}
+
 	private Mode modality;
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void makeDecision(int runLevel) {
 		// TODO Auto-generated method stub
 
 	}
@@ -125,7 +123,8 @@ public class DriverAgent extends Agent implements Driver {
 	public void setModality(Mode modality) {
 		this.modality = modality;
 	}
-
+	
+	
 	/**
 	 * @return the modality
 	 */
@@ -133,4 +132,28 @@ public class DriverAgent extends Agent implements Driver {
 		return modality;
 	}
 
+	@Override
+	public void runLevelDecision0() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void runLevelDecision1() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void runLevelDecision2() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void runLevelDecision3() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
