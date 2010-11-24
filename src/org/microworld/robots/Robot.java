@@ -12,7 +12,7 @@ import org.microworld.utils.Point;
  * @author riccardo
  * 
  */
-public class Robot implements BehaviorManager {
+public class Robot extends Role implements BehaviorManager {
 	private List<Point> list;
 	private int currentPoint = -1;
 
@@ -27,6 +27,8 @@ public class Robot implements BehaviorManager {
 	@Override
 	public String getNextPoint() {
 		if (this.list != null && (!this.list.isEmpty())) {
+			if (this.role.equals(ROLES[RIDER]) && !this.hasNext())
+				this.currentPoint = -1;
 			this.currentPoint++;
 			return this.list.get(currentPoint).toGeoRSSPoint();
 		}

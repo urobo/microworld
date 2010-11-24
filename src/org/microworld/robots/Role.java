@@ -8,23 +8,11 @@ package org.microworld.robots;
  * 
  */
 public abstract class Role {
-	protected int runlevel;
+	public static final String ROLES[] = { "driver", "rider" };
+	public static final int DRIVER = 0;
+	public static final int RIDER = 1;
+
 	protected String role;
-
-	/**
-	 * @return the runlevel
-	 */
-	public int getRunlevel() {
-		return runlevel;
-	}
-
-	/**
-	 * @param runlevel
-	 *            the runlevel to set
-	 */
-	public void setRunlevel(int runlevel) {
-		this.runlevel = runlevel;
-	}
 
 	/**
 	 * @return the role
@@ -37,8 +25,10 @@ public abstract class Role {
 	 * @param role
 	 *            the role to set
 	 */
-	public void setRole(String role) {
-		this.role = role;
+	public void setRole(int id) {
+		if (id < ROLES.length && id >= 0) {
+			this.role = Role.ROLES[id];
+		}
 	}
 
 }

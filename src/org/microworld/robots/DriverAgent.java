@@ -14,6 +14,7 @@ import org.microworld.models.Mode;
 import org.microworld.models.Participation;
 import org.microworld.models.Trip;
 import org.microworld.robots.intefaces.Driver;
+import org.microworld.utils.Point;
 
 import eu.fbk.dycapo.factories.json.DycapoObjectsFetcher;
 
@@ -133,26 +134,51 @@ public class DriverAgent extends Agent implements Driver {
 
 	@Override
 	public void runLevelDecision0() {
-		// TODO Auto-generated method stub
-
+		Trip trip = this.postTrip(this.trip);
+		if (trip instanceof Trip) {
+			this.trip = trip;
+			this.runlevel++;
+		}
 	}
 
 	@Override
 	public void runLevelDecision1() {
-		// TODO Auto-generated method stub
-
+		if (this.activateTrip(this.trip)) {
+			this.trip.setActive(true);
+			this.runlevel++;
+		}
 	}
 
 	@Override
 	public void runLevelDecision2() {
-		// TODO Auto-generated method stub
+		if (this.path.hasNext()) {
+			List<Participation> alist = this.checkRideRequests(this.trip);
+			this.fetchRideRequests(alist);
+			this.updatePosition(Point.getPositionFromPoint(this.path
+					.getNextPoint()));
+		} else {
+			this.finishTrip(this.trip);
+			this.runlevel = 0;
+		}
 
 	}
 
 	@Override
-	public void runLevelDecision3() {
-		// TODO Auto-generated method stub
-
+	public void fetchRideRequests(List<Participation> list) {
+		int i = 0;
+		List<Participation> refused = new ArrayList<Participation>();
+		while (i < list.size()) {
+			if (Math.random() <= this.acceptanceRate) {
+				i++;
+			} else {
+				refused.add(list.get(i));
+				list.remove(i);
+			}
+		}
+		if (!list.isEmpty())
+			this.acceptRideRequests(list);
+		if (!refused.isEmpty())
+			this.refuseRideRequests(refused);
 	}
 
 }

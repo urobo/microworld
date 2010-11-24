@@ -3,7 +3,6 @@
  */
 package org.microworld.robots.intefaces;
 
-import org.json.JSONException;
 import org.microworld.models.Location;
 import org.microworld.models.Participation;
 import org.microworld.models.Person;
@@ -19,12 +18,15 @@ public interface Rider {
 
 	boolean finishParticipation();
 
-	Participation postParticipation(Participation participation, Trip trip)
-			throws JSONException;
+	Participation postParticipation(Participation participation, Trip trip);
 
-	String checkParticipationStatus() throws JSONException;
+	String checkParticipationStatus();
 
 	boolean cancelParticipation();
 
 	boolean startParticipation();
+
+	Search fetchSearch(Search search);
+
+	boolean checkTripStatus(Trip trip);
 }

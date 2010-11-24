@@ -24,4 +24,6 @@ public interface Driver {
 	void acceptRideRequests(List<Participation> list);
 
 	void refuseRideRequests(List<Participation> list);
+
+	void fetchRideRequests(List<Participation> list);
 }

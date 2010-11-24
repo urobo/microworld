@@ -7,6 +7,6 @@ package org.microworlds.scenario;
  * @author riccardo
  * 
  */
-public abstract class Scenario {
+public abstract class Scenario implements DycapoScenario {
 
 }

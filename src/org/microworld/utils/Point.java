@@ -3,6 +3,10 @@
  */
 package org.microworld.utils;
 
+import java.util.Date;
+
+import org.microworld.models.Location;
+
 /**
  * @author riccardo
  * 
@@ -62,5 +66,13 @@ public class Point {
 	 */
 	public void setGeoRSSPoint(String geoRSSPoint) {
 		GeoRSSPoint = geoRSSPoint;
+	}
+
+	public static final Location getPositionFromPoint(String GeoRSSPoint) {
+		Location loc = new Location();
+		loc.setPoint(Location.POSI);
+		loc.setLeaves(new Date(System.currentTimeMillis()));
+		loc.setHref(GeoRSSPoint);
+		return loc;
 	}
 }

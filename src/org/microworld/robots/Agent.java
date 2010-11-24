@@ -22,9 +22,9 @@ import eu.fbk.dycapo.factories.json.DycapoObjectsFetcher;
  * @author riccardo
  * 
  */
-public abstract class Agent extends Role implements Runnable, DycapoUser,
-		RunLevelDecisions {
+public abstract class Agent implements Runnable, DycapoUser, RunLevelDecisions {
 
+	protected int runlevel;
 	protected Robot path;
 	protected Person user;
 	protected Trip trip;
@@ -162,8 +162,6 @@ public abstract class Agent extends Role implements Runnable, DycapoUser,
 	 */
 	@Override
 	public void runLevelDecision0() {
-		// TODO Auto-generated method stub
-
 	}
 
 	/*
@@ -174,8 +172,6 @@ public abstract class Agent extends Role implements Runnable, DycapoUser,
 	 */
 	@Override
 	public void runLevelDecision1() {
-		// TODO Auto-generated method stub
-
 	}
 
 	/*
@@ -186,20 +182,6 @@ public abstract class Agent extends Role implements Runnable, DycapoUser,
 	 */
 	@Override
 	public void runLevelDecision2() {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.microworld.robots.intefaces.RunLevelDecisions#runLevelDecision3()
-	 */
-	@Override
-	public void runLevelDecision3() {
-		// TODO Auto-generated method stub
-
 	}
 
 	/*
@@ -218,9 +200,6 @@ public abstract class Agent extends Role implements Runnable, DycapoUser,
 			break;
 		case 2:
 			runLevelDecision2();
-			break;
-		case 3:
-			runLevelDecision3();
 			break;
 		}
 	}

@@ -13,6 +13,4 @@ public interface RunLevelDecisions {
 	void runLevelDecision1();
 
 	void runLevelDecision2();
-
-	void runLevelDecision3();
 }
