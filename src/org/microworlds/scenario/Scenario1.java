@@ -3,12 +3,15 @@
  */
 package org.microworlds.scenario;
 
+import org.microworld.robots.DriverAgent;
+
 /**
  * @author riccardo
  * 
  */
 public class Scenario1 extends Scenario {
-
+	DriverAgent driver;
+	
 	/*
 	 * (non-Javadoc)
 	 * 

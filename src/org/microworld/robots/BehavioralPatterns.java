@@ -18,11 +18,16 @@ public abstract class BehavioralPatterns {
 	public static final int ROUTE = 2;
 	public static final int RIDER = 3;
 
-	private static double mLatStr[] = {
+	private static double mLatStr[] = { 46.50033, 46.50011, 46.49984, 46.49966,
+			46.49940, 46.49925, 46.49894, 46.49864, 46.49842, 46.49820,
+			46.49801, 46.49782, 46.49751, 46.49730, 46.49711, 46.49711,
+			46.49665, 46.49637
 
 	};
-	private static double mLngStr[] = {
-
+	private static double mLngStr[] = { 11.35261, 11.35306, 11.35390, 11.35452,
+			11.35491, 11.35544, 11.35624, 11.35667, 11.35740, 11.35782,
+			11.35845, 11.35922, 11.35993, 11.36027, 11.36094, 11.36094,
+			11.36203, 11.36255
 	};
 
 	private static double mLatRound[] = {
