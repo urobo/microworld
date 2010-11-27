@@ -11,7 +11,7 @@ import org.microworld.robots.DriverAgent;
  */
 public class Scenario1 extends Scenario {
 	DriverAgent driver;
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

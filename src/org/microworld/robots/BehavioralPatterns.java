@@ -27,8 +27,7 @@ public abstract class BehavioralPatterns {
 	private static double mLngStr[] = { 11.35261, 11.35306, 11.35390, 11.35452,
 			11.35491, 11.35544, 11.35624, 11.35667, 11.35740, 11.35782,
 			11.35845, 11.35922, 11.35993, 11.36027, 11.36094, 11.36094,
-			11.36203, 11.36255
-	};
+			11.36203, 11.36255 };
 
 	private static double mLatRound[] = {
 

@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.microworld.client.DycapoHttpClient;
+import org.microworld.logging.Log;
 import org.microworld.models.Location;
 import org.microworld.models.Participation;
 import org.microworld.models.Person;
@@ -22,13 +23,15 @@ import eu.fbk.dycapo.factories.json.DycapoObjectsFetcher;
  * @author riccardo
  * 
  */
-public abstract class Agent implements Runnable, DycapoUser, RunLevelDecisions {
+public abstract class Agent extends Thread implements DycapoUser,
+		RunLevelDecisions {
 
 	protected int runlevel;
 	protected Robot path;
 	protected Person user;
 	protected Trip trip;
 	protected double acceptanceRate;
+	protected State state;
 
 	public Agent(double rate) {
 		this.acceptanceRate = rate;
@@ -103,6 +106,8 @@ public abstract class Agent implements Runnable, DycapoUser, RunLevelDecisions {
 	 */
 	@Override
 	public void updatePosition(Location position) {
+		Log.verbose(this.user.getUsername(),
+				"update position" + position.toString());
 		DycapoHttpClient.callDycapo(DycapoHttpClient.POST, user.getHref()
 				+ "location/", position.toJSONObject(), user.getUsername(),
 				user.getPassword());
@@ -117,12 +122,16 @@ public abstract class Agent implements Runnable, DycapoUser, RunLevelDecisions {
 	 */
 	@Override
 	public Location getPosition(Person person) {
+		Log.verbose(this.user.getUsername(), "getting position of user : "
+				+ person.getUsername());
 		String resp = DycapoHttpClient.callDycapo(DycapoHttpClient.GET,
 				person.getHref() + "location/", null, user.getUsername(),
 				user.getPassword());
 		try {
 			Location position = DycapoObjectsFetcher
 					.buildLocation(new JSONObject(resp));
+			Log.verbose(this.user.getUsername(), "position fetched : "
+					+ position.toString());
 			return position;
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -140,12 +149,16 @@ public abstract class Agent implements Runnable, DycapoUser, RunLevelDecisions {
 	 */
 	@Override
 	public List<Participation> getParticipations(Trip trip) {
+		Log.verbose(this.user.getUsername(),
+				"getting participations list of trip : " + trip.getHref());
 		String resp = DycapoHttpClient.callDycapo(DycapoHttpClient.GET,
 				trip.getHref() + "participations/", null, user.getUsername(),
 				user.getPassword());
 		try {
 			List<Participation> result = DycapoObjectsFetcher
 					.extractTripParticipations(new JSONArray(resp));
+			Log.verbose(this.user.getUsername(),
+					"number of participations retrieved : " + result.size());
 			return result;
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -193,12 +206,15 @@ public abstract class Agent implements Runnable, DycapoUser, RunLevelDecisions {
 	public void makeDecision(int runLevel) {
 		switch (runLevel) {
 		case 0:
+			Log.verbose(this.user.getUsername(), "runlevel 0 decision");
 			runLevelDecision0();
 			break;
 		case 1:
+			Log.verbose(this.user.getUsername(), "runlevel 1 decision");
 			runLevelDecision1();
 			break;
 		case 2:
+			Log.verbose(this.user.getUsername(), "runlevel 2 decision");
 			runLevelDecision2();
 			break;
 		}

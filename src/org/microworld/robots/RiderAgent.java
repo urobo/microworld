@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.microworld.client.DycapoHttpClient;
 import org.microworld.dycapo.DycapoGlobalVariables;
+import org.microworld.logging.Log;
 import org.microworld.models.Location;
 import org.microworld.models.Participation;
 import org.microworld.models.Person;
@@ -38,6 +39,7 @@ public class RiderAgent extends Agent implements Rider {
 	@Override
 	public Search searchTrip(Location origin, Location destination,
 			Person Author) {
+		Log.verbose(this.user.getUsername(), "is searching for a trip");
 		Search search = new Search();
 		search.setAuthor(user);
 		search.setOrigin(origin);
@@ -47,6 +49,10 @@ public class RiderAgent extends Agent implements Rider {
 				search.toJSONObject(), user.getUsername(), user.getPassword());
 		try {
 			search = DycapoObjectsFetcher.buildSearch(new JSONObject(response));
+			Log.verbose(
+					this.user.getUsername(),
+					"research posted and successfully retrieved "
+							+ search.getHref());
 			return search;
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -59,11 +65,17 @@ public class RiderAgent extends Agent implements Rider {
 	@Override
 	public Participation postParticipation(Participation participation,
 			Trip trip) {
+		Log.verbose(this.user.getUsername(),
+				"is posting a new participation to trip : " + trip.getHref());
 		String response = DycapoHttpClient.callDycapo(DycapoHttpClient.POST,
 				trip.getHref() + DycapoGlobalVariables.PARTICIPATIONS,
 				participation.toJSONObject(), user.getUsername(),
 				user.getPassword());
 		try {
+			Log.verbose(
+					this.user.getUsername(),
+					"participation posted successfully to trip : "
+							+ trip.getHref());
 			return DycapoObjectsFetcher.buildParticipation(new JSONObject(
 					response));
 		} catch (JSONException e) {
@@ -75,6 +87,10 @@ public class RiderAgent extends Agent implements Rider {
 
 	@Override
 	public String checkParticipationStatus() {
+		Log.verbose(
+				this.user.getUsername(),
+				"is checking participation status "
+						+ this.participation.getHref());
 		String response = DycapoHttpClient.callDycapo(DycapoHttpClient.GET,
 				this.participation.getHref(),
 				this.participation.toJSONObject(), user.getUsername(),
@@ -85,7 +101,9 @@ public class RiderAgent extends Agent implements Rider {
 					response));
 			if (!check.getStatus().equals(this.participation.getStatus()))
 				this.participation = check;
-
+			Log.verbose(this.user.getUsername(),
+					"status : " + check.getStatus() + " of participation : "
+							+ check.getHref());
 			return check.getStatus();
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -99,12 +117,17 @@ public class RiderAgent extends Agent implements Rider {
 		DycapoHttpClient.callDycapo(DycapoHttpClient.DELETE,
 				this.participation.getHref(), null, user.getUsername(),
 				user.getPassword());
+		Log.verbose(this.user.getUsername(),
+				"cancelled his participation to the trip : "
+						+ this.participation.getHref());
 		return true;
 	}
 
 	@Override
 	public boolean startParticipation() {
 		this.participation.setStatus(Participation.STARTED);
+		Log.verbose(this.user.getUsername(), "is starting participation : "
+				+ this.participation.getHref());
 		String response = DycapoHttpClient.callDycapo(DycapoHttpClient.PUT,
 				this.participation.getHref(),
 				this.participation.toJSONObject(), user.getUsername(),
@@ -114,6 +137,9 @@ public class RiderAgent extends Agent implements Rider {
 					.buildParticipation(new JSONObject(response)));
 			if (result.getStatus().equals(Participation.STARTED)) {
 				this.participation = result;
+				Log.verbose(this.user.getUsername(),
+						"participation successfully started : "
+								+ this.participation.getHref());
 				return true;
 			}
 		} catch (JSONException e) {
@@ -127,6 +153,9 @@ public class RiderAgent extends Agent implements Rider {
 	@Override
 	public boolean finishParticipation() {
 		this.participation.setStatus(Participation.FINISHED);
+		Log.verbose(this.user.getUsername(),
+				"is finishing is participation in the trip : "
+						+ this.participation.getHref());
 		String response = DycapoHttpClient.callDycapo(DycapoHttpClient.PUT,
 				this.participation.getHref(),
 				this.participation.toJSONObject(), user.getUsername(),
@@ -136,6 +165,9 @@ public class RiderAgent extends Agent implements Rider {
 					.buildParticipation(new JSONObject(response));
 			if (result.getStatus().equals(Participation.FINISHED)) {
 				this.participation = result;
+				Log.verbose(this.user.getUsername(),
+						"participation to trip is finished : "
+								+ this.participation.getHref());
 				return true;
 			}
 
@@ -197,12 +229,17 @@ public class RiderAgent extends Agent implements Rider {
 
 	@Override
 	public Search fetchSearch(Search search) {
+		Log.verbose(this.user.getUsername(),
+				"fetching search " + search.getHref());
 		String response = DycapoHttpClient.callDycapo(DycapoHttpClient.GET,
 				search.getHref(), null, this.user.getUsername(),
 				this.user.getPassword());
 		try {
 			Search result = DycapoObjectsFetcher.buildSearch(new JSONObject(
 					response));
+			if (result.getTrips() != null)
+				Log.verbose(this.user.getUsername(), "the search retrieved "
+						+ result.getTrips().size() + " suitable trips");
 			return result;
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -214,15 +251,21 @@ public class RiderAgent extends Agent implements Rider {
 
 	@Override
 	public boolean checkTripStatus(Trip trip) {
+		Log.verbose(this.user.getUsername(), "is checking status of trip : "
+				+ trip.getHref());
 		String response = DycapoHttpClient.callDycapo(DycapoHttpClient.GET,
 				this.trip.getHref(), null, this.user.getUsername(),
 				this.user.getPassword());
 		try {
 			Trip result = DycapoObjectsFetcher.buildTrip(new JSONObject(
 					response));
-			if (result.getActive())
+			if (result.getActive()) {
+				Log.verbose(this.user.getUsername(),
+						(result.getActive()) ? "trip is active : "
+								: "trip is inactive : " + result.getHref());
+				this.trip = result;
 				return true;
-			this.trip = result;
+			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
