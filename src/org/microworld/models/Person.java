@@ -354,7 +354,13 @@ public class Person implements DycapoJSONObjects {
 
 		return null;
 	}
-
+	
+	public JSONObject toUserJSON() throws JSONException{
+		JSONObject result = this.toJSONObject();
+		result.put("password", this.password);
+		return result;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.microworld.client.DycapoHttpClient;
+import org.microworld.dycapo.DycapoGlobalVariables;
 import org.microworld.logging.Log;
 import org.microworld.models.Location;
 import org.microworld.models.Participation;
@@ -31,10 +32,10 @@ public abstract class Agent extends Thread implements DycapoUser,
 	protected Person user;
 	protected Trip trip;
 	protected double acceptanceRate;
-	protected State state;
 
 	public Agent(double rate) {
 		this.acceptanceRate = rate;
+		this.runlevel = 0;
 	}
 
 	/**
@@ -218,6 +219,28 @@ public abstract class Agent extends Thread implements DycapoUser,
 			runLevelDecision2();
 			break;
 		}
+	}
+
+	/* (non-Javadoc)
+	 * @see org.microworld.robots.intefaces.DycapoUser#register(org.microworld.models.Person)
+	 */
+	@Override
+	public void register(Person person) throws JSONException {
+		DycapoHttpClient.callDycapo(DycapoHttpClient.POST, DycapoGlobalVariables.URL_BASIS + DycapoGlobalVariables.PERSONS, person.toUserJSON(), null, null);
+	}
+
+	/**
+	 * @return the runlevel
+	 */
+	public int getRunlevel() {
+		return runlevel;
+	}
+
+	/**
+	 * @param runlevel the runlevel to set
+	 */
+	public void setRunlevel(int runlevel) {
+		this.runlevel = runlevel;
 	}
 
 	/*

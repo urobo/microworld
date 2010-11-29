@@ -64,7 +64,7 @@ public class Robot extends Role implements BehaviorManager {
 	/**
 	 * @return the list
 	 */
-	protected List<Point> getList() {
+	public List<Point> getList() {
 		return list;
 	}
 

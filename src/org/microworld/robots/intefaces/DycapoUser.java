@@ -5,6 +5,7 @@ package org.microworld.robots.intefaces;
 
 import java.util.List;
 
+import org.json.JSONException;
 import org.microworld.models.Location;
 import org.microworld.models.Participation;
 import org.microworld.models.Person;
@@ -15,6 +16,8 @@ import org.microworld.models.Trip;
  * 
  */
 public interface DycapoUser {
+	public void register(Person person) throws JSONException;
+	
 	public void updatePosition(Location position);
 
 	public Location getPosition(Person person);
