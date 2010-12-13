@@ -31,12 +31,6 @@ public class RiderAgent extends Agent implements Rider {
 	Participation participation;
 
 	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public Search searchTrip(Location origin, Location destination,
 			Person Author) {
 		Log.verbose(this.user.getUsername(), "is searching for a trip");

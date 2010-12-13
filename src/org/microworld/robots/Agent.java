@@ -221,12 +221,17 @@ public abstract class Agent extends Thread implements DycapoUser,
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.microworld.robots.intefaces.DycapoUser#register(org.microworld.models.Person)
-	 */
-	@Override
-	public void register(Person person) throws JSONException {
-		DycapoHttpClient.callDycapo(DycapoHttpClient.POST, DycapoGlobalVariables.URL_BASIS + DycapoGlobalVariables.PERSONS, person.toUserJSON(), null, null);
+	public static final boolean register(Person person) {
+		try {
+			String response = DycapoHttpClient.callDycapo(DycapoHttpClient.POST, DycapoGlobalVariables.URL_BASIS + DycapoGlobalVariables.PERSONS, person.toUserJSON(), null, null);
+			Log.verbose("Agent", "Registering a new User : \nusername: " +person.getUsername() +"\t password: "+  person.getPassword());
+			Person p = DycapoObjectsFetcher.buildPerson(new JSONObject(response));
+			if (p instanceof Person && p.getUsername() != null && p.getHref() != null)
+				return true;
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	/**

@@ -30,11 +30,6 @@ public class DriverAgent extends Agent implements Driver {
 
 	private Mode modality;
 
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public Trip postTrip(Trip trip) {

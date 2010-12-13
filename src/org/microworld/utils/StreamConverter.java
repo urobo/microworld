@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import org.microworld.logging.Log;
+
 /**
  * @author riccardo
  * 
@@ -20,7 +22,7 @@ public abstract class StreamConverter {
 		try {
 			while ((line = reader.readLine()) != null) {
 				sb.append(line + "\n");
-				System.out.println(line);
+				Log.verbose("Stream Converter", line);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

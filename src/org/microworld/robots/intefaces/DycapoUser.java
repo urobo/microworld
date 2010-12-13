@@ -16,7 +16,6 @@ import org.microworld.models.Trip;
  * 
  */
 public interface DycapoUser {
-	public void register(Person person) throws JSONException;
 	
 	public void updatePosition(Location position);
 
