@@ -12,6 +12,7 @@ import org.microworld.models.Mode;
 import org.microworld.models.Person;
 import org.microworld.models.Preferences;
 import org.microworld.models.Trip;
+import org.microworld.robots.Agent;
 import org.microworld.robots.BehavioralPatterns;
 import org.microworld.robots.DriverAgent;
 import org.microworld.robots.Robot;
@@ -30,7 +31,6 @@ public class Scenario1 extends Scenario {
 	 * 
 	 * @see org.microworlds.scenario.DycapoScenario#setUp()
 	 */
-	@Override
 	public void setUp() {
 		
 		Log.verbose("Scenario1 SetUp", "starting");
@@ -60,7 +60,7 @@ public class Scenario1 extends Scenario {
 		modality.setModel("M3");
 		
 		Person person = new Person();
-		person.setUsername(USERNAME_PREFIX + (this.agentCounter++));
+		person.setUsername("django");
 		person.setPassword(LOGIN_PASSWORD);
 		person.setEmail("asd@asd.com");
 		person.setPhone("1223334444");
@@ -77,6 +77,7 @@ public class Scenario1 extends Scenario {
 		trip.setActive(false);
 		
 		driver.setTrip(trip);
+		driver.register(driver.getUser());
 		Log.verbose("Scenario1 SetUp", "finished ready to start the simulation ...");
 	}
 
@@ -88,13 +89,8 @@ public class Scenario1 extends Scenario {
 	@Override
 	public void start() {
 		Log.verbose("Scenario1 Start", "starting the scenario");
-		try {
-			driver.register(driver.getUser());
-			driver.start();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		driver.start();
 	
 		Log.verbose("Scenario1 Start", "Simulation began");
 	}

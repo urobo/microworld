@@ -17,7 +17,7 @@ import org.microworld.models.Trip;
  */
 public interface DycapoUser {
 	
-	public void updatePosition(Location position);
+	public Location updatePosition(Location position);
 
 	public Location getPosition(Person person);
 
