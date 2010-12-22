@@ -29,6 +29,16 @@ public class Participation implements DycapoJSONObjects {
 	protected String href;
 
 	/**
+	 * @param author
+	 * @param status
+	 */
+	public Participation(Person author, String status) {
+		super();
+		this.author = author;
+		this.status = status;
+	}
+
+	/**
 	 * 
 	 */
 	public Participation() {

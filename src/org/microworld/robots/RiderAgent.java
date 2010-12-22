@@ -28,6 +28,11 @@ public class RiderAgent extends Agent implements Rider {
 		super(rate);
 	}
 
+	public RiderAgent(Person person, double rate) {
+		super(rate);
+		this.user = person;
+	}
+
 	Participation participation;
 
 	@Override
@@ -70,13 +75,28 @@ public class RiderAgent extends Agent implements Rider {
 					this.user.getUsername(),
 					"participation posted successfully to trip : "
 							+ trip.getHref());
-			return DycapoObjectsFetcher.buildParticipation(new JSONObject(
+			this.participation = DycapoObjectsFetcher.buildParticipation(new JSONObject(
 					response));
+			return this.participation;
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	/**
+	 * @return the participation
+	 */
+	public Participation getParticipation() {
+		return participation;
+	}
+
+	/**
+	 * @param participation the participation to set
+	 */
+	public void setParticipation(Participation participation) {
+		this.participation = participation;
 	}
 
 	@Override

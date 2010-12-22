@@ -61,12 +61,18 @@ public class DriverAgent extends Agent implements Driver {
 				trip.getHref(), trip.toJSONObject(), user.getUsername(),
 				user.getPassword());
 		try {
-			Trip active = DycapoObjectsFetcher.buildTrip(new JSONObject(
+			JSONObject json = new JSONObject(response);
+			if (json.has("message")){
+				Log.verbose("DriverAgent", json.getString("message"));
+				this.trip.setActive(true);
+			}else{
+				Trip active = DycapoObjectsFetcher.buildTrip(new JSONObject(
 					response));
-			if (active != null && active.getActive()) {
-				Log.verbose(this.user.getUsername(),
+				if (active != null && active.getActive()) {
+					Log.verbose(this.user.getUsername(),
 						"successfully activated trip :" + trip.getHref());
-				return true;
+					return true;
+				}
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

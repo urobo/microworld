@@ -105,6 +105,22 @@ public class Person implements DycapoJSONObjects {
 	}
 
 	/**
+	 * @param username
+	 * @param password
+	 * @param email
+	 * @param phone
+	 * @param gender
+	 */
+	public Person(String username, String password, String email, String phone,
+			String gender) {
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.phone = phone;
+		this.gender = gender;
+	}
+
+	/**
 	 * @return the username
 	 */
 	public String getUsername() {

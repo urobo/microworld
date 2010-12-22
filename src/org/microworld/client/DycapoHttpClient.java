@@ -19,6 +19,7 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
+import org.microworld.logging.Log;
 import org.microworld.utils.StreamConverter;
 
 /**
@@ -96,13 +97,13 @@ public abstract class DycapoHttpClient {
 		try {
 			uriF = new URI(uri);
 
-			if (username instanceof String || password instanceof String) {
+			if (username instanceof String && password instanceof String) {
 				USRN_PWD_CRD = new UsernamePasswordCredentials(username,
 						password);
 				httpclient.getCredentialsProvider().setCredentials(
 						new AuthScope(uriF.getHost(), uriF.getPort(),
 								AuthScope.ANY_REALM), USRN_PWD_CRD);
-
+				Log.verbose("DycapoHttpClient", USRN_PWD_CRD.toString());
 			}
 			HttpResponse response = null;
 			StringEntity se;
