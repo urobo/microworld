@@ -75,8 +75,8 @@ public class RiderAgent extends Agent implements Rider {
 					this.user.getUsername(),
 					"participation posted successfully to trip : "
 							+ trip.getHref());
-			this.participation = DycapoObjectsFetcher.buildParticipation(new JSONObject(
-					response));
+			this.participation = DycapoObjectsFetcher
+					.buildParticipation(new JSONObject(response));
 			return this.participation;
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -93,7 +93,8 @@ public class RiderAgent extends Agent implements Rider {
 	}
 
 	/**
-	 * @param participation the participation to set
+	 * @param participation
+	 *            the participation to set
 	 */
 	public void setParticipation(Participation participation) {
 		this.participation = participation;

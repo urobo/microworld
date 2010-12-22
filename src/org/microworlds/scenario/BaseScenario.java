@@ -9,11 +9,14 @@ import org.microworld.robots.DriverAgent;
 
 /**
  * @author riccardo
- *
+ * 
  */
 public class BaseScenario extends Scenario {
 	Person user = new Person();
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.microworlds.scenario.DycapoScenario#setUp()
 	 */
 	@Override
@@ -24,7 +27,9 @@ public class BaseScenario extends Scenario {
 		this.user.setPhone("030318236");
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.microworlds.scenario.DycapoScenario#start()
 	 */
 	@Override
@@ -34,7 +39,9 @@ public class BaseScenario extends Scenario {
 		agent.register(user);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.microworlds.scenario.DycapoScenario#stop()
 	 */
 	@Override
@@ -43,7 +50,9 @@ public class BaseScenario extends Scenario {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.microworlds.scenario.DycapoScenario#load(java.lang.String)
 	 */
 	@Override

@@ -109,18 +109,19 @@ public abstract class Agent extends Thread implements DycapoUser,
 	public Location updatePosition(Location position) {
 		Log.verbose(this.user.getUsername(),
 				"update position" + position.toString());
-		String result = DycapoHttpClient.callDycapo(DycapoHttpClient.POST, user.getHref()
-				+ "location/", position.toJSONObject(), user.getUsername(),
-				user.getPassword());
+		String result = DycapoHttpClient.callDycapo(DycapoHttpClient.POST,
+				user.getHref() + "location/", position.toJSONObject(),
+				user.getUsername(), user.getPassword());
 		try {
-			Location posi = DycapoObjectsFetcher.buildLocation(new JSONObject(result));
+			Location posi = DycapoObjectsFetcher.buildLocation(new JSONObject(
+					result));
 			return posi;
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
-		
+
 	}
 
 	/*
@@ -232,11 +233,20 @@ public abstract class Agent extends Thread implements DycapoUser,
 
 	public boolean register(Person person) {
 		try {
-			String response = DycapoHttpClient.callDycapo(DycapoHttpClient.POST, DycapoGlobalVariables.URL_BASIS + DycapoGlobalVariables.PERSONS, person.toUserJSON(), null, null);
-			Log.verbose("Agent", "Registering a new User : \nusername: " +person.getUsername() +"\t password: "+  person.getPassword());
+			String response = DycapoHttpClient.callDycapo(
+					DycapoHttpClient.POST, DycapoGlobalVariables.URL_BASIS
+							+ DycapoGlobalVariables.PERSONS,
+					person.toUserJSON(), null, null);
+			Log.verbose(
+					"Agent",
+					"Registering a new User : \nusername: "
+							+ person.getUsername() + "\t password: "
+							+ person.getPassword());
 			Log.verbose("Server Answer to registration", response);
-			Person p = DycapoObjectsFetcher.buildPerson(new JSONObject(response));
-			if (p instanceof Person && p.getUsername() != null && p.getHref() != null){
+			Person p = DycapoObjectsFetcher
+					.buildPerson(new JSONObject(response));
+			if (p instanceof Person && p.getUsername() != null
+					&& p.getHref() != null) {
 				this.user.setHref(p.getHref());
 				return true;
 			}
@@ -254,7 +264,8 @@ public abstract class Agent extends Thread implements DycapoUser,
 	}
 
 	/**
-	 * @param runlevel the runlevel to set
+	 * @param runlevel
+	 *            the runlevel to set
 	 */
 	public void setRunlevel(int runlevel) {
 		this.runlevel = runlevel;

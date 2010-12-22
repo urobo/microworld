@@ -30,7 +30,6 @@ public class DriverAgent extends Agent implements Driver {
 
 	private Mode modality;
 
-
 	@Override
 	public Trip postTrip(Trip trip) {
 		Log.verbose(this.user.getUsername(), "posting trip");
@@ -62,15 +61,15 @@ public class DriverAgent extends Agent implements Driver {
 				user.getPassword());
 		try {
 			JSONObject json = new JSONObject(response);
-			if (json.has("message")){
+			if (json.has("message")) {
 				Log.verbose("DriverAgent", json.getString("message"));
 				this.trip.setActive(true);
-			}else{
+			} else {
 				Trip active = DycapoObjectsFetcher.buildTrip(new JSONObject(
-					response));
+						response));
 				if (active != null && active.getActive()) {
 					Log.verbose(this.user.getUsername(),
-						"successfully activated trip :" + trip.getHref());
+							"successfully activated trip :" + trip.getHref());
 					return true;
 				}
 			}
@@ -98,37 +97,37 @@ public class DriverAgent extends Agent implements Driver {
 	}
 
 	@Override
-	public void acceptRideRequests(List<Participation> list) {
-		for (int i = 0; i < list.size(); i++) {
-			list.get(i).setStatus(Participation.ACCEPTED);
-			DycapoHttpClient.callDycapo(DycapoHttpClient.PUT, list.get(i)
-					.getHref(), list.get(i).toJSONObject(), user.getUsername(),
-					user.getPassword());
-			Log.verbose(this.user.getUsername(), "user " + list.get(i)
-					+ " has been added to the trip");
+	public List<Participation> acceptRideRequests(List<Participation> list) {
+		List<Participation> result = new ArrayList<Participation>();
+		try {
+			for (int i = 0; i < list.size(); i++) {
+				list.get(i).setStatus(Participation.ACCEPTED);
+				String response = DycapoHttpClient.callDycapo(
+						DycapoHttpClient.PUT, list.get(i).getHref(), list
+								.get(i).toJSONObject(), user.getUsername(),
+						user.getPassword());
+				Log.verbose(this.user.getUsername(), "user " + list.get(i)
+						+ " has been added to the trip");
+
+				result.add(DycapoObjectsFetcher
+						.buildParticipation(new JSONObject(response)));
+			}
+			return result;
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
+		return null;
 	}
 
 	@Override
 	public boolean finishTrip(Trip trip) {
 		trip.setActive(false);
-		String response = DycapoHttpClient.callDycapo(DycapoHttpClient.PUT,
-				trip.getHref(), trip.toJSONObject(), user.getUsername(),
-				user.getPassword());
-		try {
-			Trip active = DycapoObjectsFetcher.buildTrip(new JSONObject(
-					response));
-			if (active != null && active.getActive()) {
-				Log.verbose(this.user.getUsername(),
-						"has just finished is trip!");
-				this.interrupt();
-				return true;
-			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
+		DycapoHttpClient.callDycapo(DycapoHttpClient.PUT, trip.getHref(),
+				trip.toJSONObject(), user.getUsername(), user.getPassword());
+		this.interrupt();
+		return true;
 	}
 
 	@Override

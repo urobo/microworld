@@ -3,7 +3,7 @@
  */
 package org.microworld.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -13,7 +13,7 @@ import org.junit.Test;
 
 /**
  * @author riccardo
- *
+ * 
  */
 public class RiderTest {
 
@@ -46,7 +46,9 @@ public class RiderTest {
 	}
 
 	/**
-	 * Test method for {@link org.microworld.robots.RiderAgent#searchTrip(org.microworld.models.Location, org.microworld.models.Location, org.microworld.models.Person)}.
+	 * Test method for
+	 * {@link org.microworld.robots.RiderAgent#searchTrip(org.microworld.models.Location, org.microworld.models.Location, org.microworld.models.Person)}
+	 * .
 	 */
 	@Test
 	public void testSearchTrip() {
@@ -54,7 +56,9 @@ public class RiderTest {
 	}
 
 	/**
-	 * Test method for {@link org.microworld.robots.RiderAgent#postParticipation(org.microworld.models.Participation, org.microworld.models.Trip)}.
+	 * Test method for
+	 * {@link org.microworld.robots.RiderAgent#postParticipation(org.microworld.models.Participation, org.microworld.models.Trip)}
+	 * .
 	 */
 	@Test
 	public void testPostParticipation() {
@@ -62,7 +66,8 @@ public class RiderTest {
 	}
 
 	/**
-	 * Test method for {@link org.microworld.robots.RiderAgent#checkParticipationStatus()}.
+	 * Test method for
+	 * {@link org.microworld.robots.RiderAgent#checkParticipationStatus()}.
 	 */
 	@Test
 	public void testCheckParticipationStatus() {
@@ -70,7 +75,8 @@ public class RiderTest {
 	}
 
 	/**
-	 * Test method for {@link org.microworld.robots.RiderAgent#cancelParticipation()}.
+	 * Test method for
+	 * {@link org.microworld.robots.RiderAgent#cancelParticipation()}.
 	 */
 	@Test
 	public void testCancelParticipation() {
@@ -78,7 +84,8 @@ public class RiderTest {
 	}
 
 	/**
-	 * Test method for {@link org.microworld.robots.RiderAgent#startParticipation()}.
+	 * Test method for
+	 * {@link org.microworld.robots.RiderAgent#startParticipation()}.
 	 */
 	@Test
 	public void testStartParticipation() {
@@ -86,7 +93,8 @@ public class RiderTest {
 	}
 
 	/**
-	 * Test method for {@link org.microworld.robots.RiderAgent#finishParticipation()}.
+	 * Test method for
+	 * {@link org.microworld.robots.RiderAgent#finishParticipation()}.
 	 */
 	@Test
 	public void testFinishParticipation() {
@@ -94,7 +102,9 @@ public class RiderTest {
 	}
 
 	/**
-	 * Test method for {@link org.microworld.robots.RiderAgent#fetchSearch(org.microworld.models.Search)}.
+	 * Test method for
+	 * {@link org.microworld.robots.RiderAgent#fetchSearch(org.microworld.models.Search)}
+	 * .
 	 */
 	@Test
 	public void testFetchSearch() {
@@ -102,7 +112,9 @@ public class RiderTest {
 	}
 
 	/**
-	 * Test method for {@link org.microworld.robots.RiderAgent#checkTripStatus(org.microworld.models.Trip)}.
+	 * Test method for
+	 * {@link org.microworld.robots.RiderAgent#checkTripStatus(org.microworld.models.Trip)}
+	 * .
 	 */
 	@Test
 	public void testCheckTripStatus() {

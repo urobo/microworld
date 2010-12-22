@@ -15,4 +15,3 @@ public abstract class DycapoGlobalVariables {
 	public static final String TRIPS = "trips/";
 	public static final String LOCATION = "location/";
 }
-	

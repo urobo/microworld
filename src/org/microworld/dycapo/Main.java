@@ -5,7 +5,6 @@ package org.microworld.dycapo;
 
 import org.microworlds.scenario.BaseScenario;
 import org.microworlds.scenario.Scenario;
-import org.microworlds.scenario.Scenario1;
 
 /**
  * @author riccardo

@@ -21,7 +21,7 @@ public interface Driver {
 
 	List<Participation> checkRideRequests(Trip trip);
 
-	void acceptRideRequests(List<Participation> list);
+	List<Participation> acceptRideRequests(List<Participation> list);
 
 	void refuseRideRequests(List<Participation> list);
 
