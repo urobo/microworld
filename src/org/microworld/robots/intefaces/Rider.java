@@ -26,7 +26,5 @@ public interface Rider {
 
 	boolean startParticipation();
 
-	Search fetchSearch(Search search);
-
 	boolean checkTripStatus(Trip trip);
 }

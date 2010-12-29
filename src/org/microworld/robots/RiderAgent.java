@@ -52,6 +52,11 @@ public class RiderAgent extends Agent implements Rider {
 					this.user.getUsername(),
 					"research posted and successfully retrieved "
 							+ search.getHref());
+			String searchresult = DycapoHttpClient.callDycapo(DycapoHttpClient.GET, search.getHref(), null, user.getUsername(), user.getPassword());
+			search = DycapoObjectsFetcher.buildSearch(new JSONObject(searchresult));
+			if (search.getTrips() != null)
+				Log.verbose(this.user.getUsername(), "the search retrieved "
+						+ search.getTrips().size() + " suitable trips");
 			return search;
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -150,13 +155,9 @@ public class RiderAgent extends Agent implements Rider {
 		try {
 			Participation result = (DycapoObjectsFetcher
 					.buildParticipation(new JSONObject(response)));
-			if (result.getStatus().equals(Participation.STARTED)) {
-				this.participation = result;
-				Log.verbose(this.user.getUsername(),
-						"participation successfully started : "
-								+ this.participation.getHref());
-				return true;
-			}
+		
+			return true;
+			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -178,13 +179,8 @@ public class RiderAgent extends Agent implements Rider {
 		try {
 			Participation result = DycapoObjectsFetcher
 					.buildParticipation(new JSONObject(response));
-			if (result.getStatus().equals(Participation.FINISHED)) {
-				this.participation = result;
-				Log.verbose(this.user.getUsername(),
-						"participation to trip is finished : "
-								+ this.participation.getHref());
-				return true;
-			}
+			
+			return true;
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -198,7 +194,6 @@ public class RiderAgent extends Agent implements Rider {
 	public void runLevelDecision0() {
 		Search search = this.searchTrip(this.trip.getOrigin(),
 				this.trip.getDestination(), this.user);
-		search = this.fetchSearch(search);
 		if (!search.getTrips().isEmpty()) {
 			int i = 0;
 			while (i < search.getTrips().size()) {
@@ -240,28 +235,6 @@ public class RiderAgent extends Agent implements Rider {
 				this.runlevel = 0;
 			}
 		}
-	}
-
-	@Override
-	public Search fetchSearch(Search search) {
-		Log.verbose(this.user.getUsername(),
-				"fetching search " + search.getHref());
-		String response = DycapoHttpClient.callDycapo(DycapoHttpClient.GET,
-				search.getHref(), null, this.user.getUsername(),
-				this.user.getPassword());
-		try {
-			Search result = DycapoObjectsFetcher.buildSearch(new JSONObject(
-					response));
-			if (result.getTrips() != null)
-				Log.verbose(this.user.getUsername(), "the search retrieved "
-						+ result.getTrips().size() + " suitable trips");
-			return result;
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return null;
 	}
 
 	@Override
