@@ -5,6 +5,7 @@ package org.microworld.dycapo;
 
 import org.microworlds.scenario.BaseScenario;
 import org.microworlds.scenario.Scenario;
+import org.microworlds.scenario.Scenario1;
 
 /**
  * @author riccardo
@@ -20,7 +21,7 @@ public class Main {
 		// DycapoHttpClient.callDycapo(DycapoHttpClient.GET, URL, null,
 		// USERNAME,
 		// PASSWORD);
-		Scenario scenario = new BaseScenario();
+		Scenario scenario = new Scenario1();
 		scenario.setUp();
 		scenario.start();
 	}

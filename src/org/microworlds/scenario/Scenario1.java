@@ -65,6 +65,7 @@ public class Scenario1 extends Scenario {
 		person.setPassword(LOGIN_PASSWORD);
 		person.setEmail("asd@asd.com");
 		person.setPhone("1223334444");
+		person.setGender(Person.MALE);
 		driver.setUser(person);
 
 		trip = new Trip();

@@ -22,9 +22,10 @@ public class BaseScenario extends Scenario {
 	@Override
 	public void setUp() {
 		this.user.setUsername("urobo");
-		this.user.setPassword("Password");
+		this.user.setPassword("password");
 		this.user.setEmail("rico.sleeps@gmail.com");
 		this.user.setPhone("030318236");
+		this.user.setGender(Person.MALE);
 	}
 
 	/*
