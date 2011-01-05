@@ -25,6 +25,4 @@ public interface Rider {
 	boolean cancelParticipation();
 
 	boolean startParticipation();
-
-	boolean checkTripStatus(Trip trip);
 }

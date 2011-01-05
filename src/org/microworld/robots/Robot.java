@@ -6,6 +6,7 @@ package org.microworld.robots;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.microworld.logging.Log;
 import org.microworld.utils.Point;
 
 /**
@@ -30,6 +31,7 @@ public class Robot extends Role implements BehaviorManager {
 			if (this.role.equals(ROLES[RIDER]) && !this.hasNext())
 				this.currentPoint = -1;
 			this.currentPoint++;
+			Log.verbose("ROBOT", list.get(currentPoint).toString());
 			return this.list.get(currentPoint).toGeoRSSPoint();
 		}
 		return null;

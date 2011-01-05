@@ -190,7 +190,6 @@ public class RiderAgent extends Agent implements Rider {
 		return false;
 	}
 
-	@Override
 	public void runLevelDecision0() {
 		Search search = this.searchTrip(this.trip.getOrigin(),
 				this.trip.getDestination(), this.user);
@@ -207,58 +206,49 @@ public class RiderAgent extends Agent implements Rider {
 			participation.setStatus(Participation.REQUESTED);
 			this.participation = this.postParticipation(participation, search
 					.getTrips().get(i));
-			this.runlevel++;
+			this.setRunlevel(1);
 		}
 	}
 
-	@Override
 	public void runLevelDecision1() {
 		this.updatePosition(Point.getPositionFromPoint(this.path.getNextPoint()));
 		String newStatus = this.checkParticipationStatus();
 		if (newStatus != null && newStatus.equals(Participation.ACCEPTED)) {
 			if (Math.random() <= this.acceptanceRate) {
 				if (this.startParticipation())
-					this.runlevel++;
+					this.setRunlevel(2);
 			} else {
 				this.cancelParticipation();
-				this.runlevel = 0;
+				this.setRunlevel(-1);
 			}
 
 		}
 	}
 
-	@Override
 	public void runLevelDecision2() {
-		if (this.checkTripStatus(this.trip)) {
-			if (Math.random() <= 0.5) {
-				this.finishParticipation();
-				this.runlevel = 0;
-			}
+		
+		if (Math.random() <= 0.5) {
+			this.finishParticipation();
+			this.setRunlevel(-1);
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.microworld.robots.Agent#makeDecision(int)
+	 */
 	@Override
-	public boolean checkTripStatus(Trip trip) {
-		Log.verbose(this.user.getUsername(), "is checking status of trip : "
-				+ trip.getHref());
-		String response = DycapoHttpClient.callDycapo(DycapoHttpClient.GET,
-				this.trip.getHref(), null, this.user.getUsername(),
-				this.user.getPassword());
-		try {
-			Trip result = DycapoObjectsFetcher.buildTrip(new JSONObject(
-					response));
-			if (result.getActive()) {
-				Log.verbose(this.user.getUsername(),
-						(result.getActive()) ? "trip is active : "
-								: "trip is inactive : " + result.getHref());
-				this.trip = result;
-				return true;
-			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void makeDecision(int runLevel) {
+		switch(runLevel){
+		case 0:
+			this.runLevelDecision0();
+			break;
+		case 1:
+			this.runLevelDecision1();
+			break;
+		case 2:
+			this.runLevelDecision2();
+			break;
 		}
-		return false;
 	}
 
 }

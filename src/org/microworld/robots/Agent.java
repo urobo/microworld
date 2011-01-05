@@ -16,26 +16,23 @@ import org.microworld.models.Participation;
 import org.microworld.models.Person;
 import org.microworld.models.Trip;
 import org.microworld.robots.intefaces.DycapoUser;
-import org.microworld.robots.intefaces.RunLevelDecisions;
-
 import eu.fbk.dycapo.factories.json.DycapoObjectsFetcher;
 
 /**
  * @author riccardo
  * 
  */
-public abstract class Agent extends Thread implements DycapoUser,
-		RunLevelDecisions {
+public abstract class Agent extends Thread implements DycapoUser{
 
 	protected int runlevel;
 	protected Robot path;
 	protected Person user;
 	protected Trip trip;
 	protected double acceptanceRate;
-
+	
 	public Agent(double rate) {
 		this.acceptanceRate = rate;
-		this.runlevel = 0;
+		this.setRunlevel(0);
 	}
 
 	/**
@@ -181,54 +178,11 @@ public abstract class Agent extends Thread implements DycapoUser,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.microworld.robots.intefaces.RunLevelDecisions#runLevelDecision0()
-	 */
-	@Override
-	public void runLevelDecision0() {
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.microworld.robots.intefaces.RunLevelDecisions#runLevelDecision1()
-	 */
-	@Override
-	public void runLevelDecision1() {
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.microworld.robots.intefaces.RunLevelDecisions#runLevelDecision2()
-	 */
-	@Override
-	public void runLevelDecision2() {
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.microworld.robots.intefaces.DycapoUser#makeDecision(int)
 	 */
 	@Override
 	public void makeDecision(int runLevel) {
-		switch (runLevel) {
-		case 0:
-			Log.verbose(this.user.getUsername(), "runlevel 0 decision");
-			runLevelDecision0();
-			break;
-		case 1:
-			Log.verbose(this.user.getUsername(), "runlevel 1 decision");
-			runLevelDecision1();
-			break;
-		case 2:
-			Log.verbose(this.user.getUsername(), "runlevel 2 decision");
-			runLevelDecision2();
-			break;
-		}
+		
 	}
 
 	public boolean register(Person person) {
@@ -278,7 +232,7 @@ public abstract class Agent extends Thread implements DycapoUser,
 	 */
 	@Override
 	public void run() {
-		while (true) {
+		while (this.getRunlevel()!=-1) {
 			try {
 				makeDecision(this.runlevel);
 				Thread.sleep(1000);

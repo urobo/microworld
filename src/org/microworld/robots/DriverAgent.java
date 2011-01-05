@@ -4,6 +4,7 @@
 package org.microworld.robots;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.json.JSONException;
@@ -11,6 +12,7 @@ import org.json.JSONObject;
 import org.microworld.client.DycapoHttpClient;
 import org.microworld.dycapo.DycapoGlobalVariables;
 import org.microworld.logging.Log;
+import org.microworld.models.Location;
 import org.microworld.models.Mode;
 import org.microworld.models.Participation;
 import org.microworld.models.Trip;
@@ -126,7 +128,6 @@ public class DriverAgent extends Agent implements Driver {
 		trip.setActive(false);
 		DycapoHttpClient.callDycapo(DycapoHttpClient.PUT, trip.getHref(),
 				trip.toJSONObject(), user.getUsername(), user.getPassword());
-		this.interrupt();
 		return true;
 	}
 
@@ -157,35 +158,39 @@ public class DriverAgent extends Agent implements Driver {
 		return modality;
 	}
 
-	@Override
 	public void runLevelDecision0() {
+		this.trip.setActive(true);
 		Trip trip = this.postTrip(this.trip);
 		if (trip instanceof Trip) {
 			this.trip = trip;
-			this.runlevel++;
+			this.setRunlevel(1);
 		}
 	}
 
-	@Override
 	public void runLevelDecision1() {
-		if (this.activateTrip(this.trip)) {
-			this.trip.setActive(true);
-			this.runlevel++;
-		}
-	}
-
-	@Override
-	public void runLevelDecision2() {
 		if (this.path.hasNext()) {
 			List<Participation> alist = this.checkRideRequests(this.trip);
 			this.fetchRideRequests(alist);
-			this.updatePosition(Point.getPositionFromPoint(this.path
-					.getNextPoint()));
+			if(this.path.hasNext()){
+				Location position  = new Location();
+				position.setLeaves(new Date(System.currentTimeMillis()));
+				position.setGeorss_point(this.path
+					.getNextPoint());
+				position.setPoint(Location.POSI);
+				this.updatePosition(position);
+			}else{
+				this.setRunlevel(-1);
+				Log.verbose("Driver", this.user.getUsername() + " trip finished!");
+			}
 		} else {
-			this.finishTrip(this.trip);
-			this.runlevel = 0;
+			this.setRunlevel(2);
 		}
 
+	}
+	
+	public void runLevelDecision2() {
+		this.finishTrip(this.trip);
+		this.setRunlevel(-1);
 	}
 
 	@Override
@@ -205,6 +210,25 @@ public class DriverAgent extends Agent implements Driver {
 			this.acceptRideRequests(list);
 		if (!refused.isEmpty())
 			this.refuseRideRequests(refused);
+	}
+
+
+	/* (non-Javadoc)
+	 * @see org.microworld.robots.Agent#makeDecision(int)
+	 */
+	@Override
+	public void makeDecision(int runLevel) {
+		switch(runlevel){
+		case 0:
+			this.runLevelDecision0();
+			break;
+		case 1:
+			this.runLevelDecision1();
+			break;
+		case 2:
+			this.runLevelDecision2();
+			break;
+		}
 	}
 
 }
