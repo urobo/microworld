@@ -110,11 +110,11 @@ public abstract class DycapoHttpClient {
 			switch (method) {
 			case HEAD:
 				HttpHead headRequest = new HttpHead(uriF);
-				response = (HttpResponse) httpclient.execute(headRequest);
+				response = httpclient.execute(headRequest);
 				break;
 			case GET:
 				HttpGet getRequest = new HttpGet(uriF);
-				response = (HttpResponse) httpclient.execute(getRequest);
+				response = httpclient.execute(getRequest);
 				break;
 
 			case POST:
@@ -124,7 +124,7 @@ public abstract class DycapoHttpClient {
 				requestPost.setHeader("Accept", "application/json");
 				requestPost.setHeader("Content-type", "application/json");
 				requestPost.setEntity(se);
-				response = (HttpResponse) httpclient.execute(requestPost);
+				response = httpclient.execute(requestPost);
 				break;
 
 			case PUT:
@@ -134,11 +134,11 @@ public abstract class DycapoHttpClient {
 				requestPut.setHeader("Accept", "application/json");
 				requestPut.setHeader("Content-type", "application/json");
 				requestPut.setEntity(se);
-				response = (HttpResponse) httpclient.execute(requestPut);
+				response = httpclient.execute(requestPut);
 				break;
 			case DELETE:
 				HttpDelete requestDelete = new HttpDelete(uriF);
-				response = (HttpResponse) httpclient.execute(requestDelete);
+				response = httpclient.execute(requestDelete);
 				break;
 			default:
 

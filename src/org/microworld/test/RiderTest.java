@@ -4,8 +4,6 @@
 package org.microworld.test;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.fail;
-
 import java.util.Date;
 
 import org.junit.After;
@@ -24,6 +22,7 @@ import org.microworld.robots.BehavioralPatterns;
 import org.microworld.robots.DriverAgent;
 import org.microworld.robots.RiderAgent;
 import org.microworld.robots.Robot;
+import org.microworld.robots.Role;
 
 /**
  * @author riccardo
@@ -45,7 +44,7 @@ public class RiderTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		Robot path = new Robot(BehavioralPatterns.getBehavioralPattern(BehavioralPatterns.STRAIGHT_LINE));
-		path.setRole(Robot.RIDER);
+		path.setRole(Role.RIDER);
 		
 		user.setUsername("ridertest");
 		user.setPassword("password");

@@ -77,9 +77,9 @@ public class AgentTest {
 	 */
 	@Test
 	public void testRegister() {
-		Log.verbose("AgentTest", this.p.toString());
-		this.agent.setUser(this.p);
-		assertTrue(this.agent.register(this.p));
+		Log.verbose("AgentTest", AgentTest.p.toString());
+		AgentTest.agent.setUser(AgentTest.p);
+		assertTrue(AgentTest.agent.register(AgentTest.p));
 	}
 
 	/**
@@ -89,19 +89,19 @@ public class AgentTest {
 	 */
 	@Test
 	public void testUpdatePosition() {
-		Log.verbose("django update position", this.agent.getUser()
+		Log.verbose("django update position", AgentTest.agent.getUser()
 				.getUsername()
 				+ " "
-				+ this.agent.getUser().getPassword()
+				+ AgentTest.agent.getUser().getPassword()
 				+ " "
-				+ this.agent.getUser().getHref());
+				+ AgentTest.agent.getUser().getHref());
 		Location result = agent.updatePosition(loc);
 
 		assertNotNull(result);
 		assertTrue(result.getGeorss_point().equals(loc.getGeorss_point()));
 		assertTrue(result.getPoint().equals(loc.getPoint()));
 		assertTrue(result.getHref()
-				.equals(this.agent.getUser().getHref()
+				.equals(AgentTest.agent.getUser().getHref()
 						+ DycapoGlobalVariables.LOCATION));
 
 	}
@@ -114,14 +114,14 @@ public class AgentTest {
 	@Test
 	public void testGetPosition() {
 
-		this.agent.updatePosition(this.loc);
-		Location result = this.agent.getPosition(p);
+		AgentTest.agent.updatePosition(AgentTest.loc);
+		Location result = AgentTest.agent.getPosition(p);
 
 		assertNotNull(result);
 		assertTrue(result.getGeorss_point().equals(loc.getGeorss_point()));
 		assertTrue(result.getPoint().equals(loc.getPoint()));
 		assertTrue(result.getHref()
-				.equals(this.agent.getUser().getHref()
+				.equals(AgentTest.agent.getUser().getHref()
 						+ DycapoGlobalVariables.LOCATION));
 	}
 

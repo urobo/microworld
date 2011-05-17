@@ -109,6 +109,7 @@ public abstract class Agent extends Thread implements DycapoUser{
 		String result = DycapoHttpClient.callDycapo(DycapoHttpClient.POST,
 				user.getHref() + "location/", position.toJSONObject(),
 				user.getUsername(), user.getPassword());
+
 		try {
 			Location posi = DycapoObjectsFetcher.buildLocation(new JSONObject(
 					result));
@@ -135,6 +136,7 @@ public abstract class Agent extends Thread implements DycapoUser{
 		String resp = DycapoHttpClient.callDycapo(DycapoHttpClient.GET,
 				person.getHref() + "location/", null, user.getUsername(),
 				user.getPassword());
+
 		try {
 			Location position = DycapoObjectsFetcher
 					.buildLocation(new JSONObject(resp));

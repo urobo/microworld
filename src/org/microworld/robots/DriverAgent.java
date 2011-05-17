@@ -17,8 +17,6 @@ import org.microworld.models.Mode;
 import org.microworld.models.Participation;
 import org.microworld.models.Trip;
 import org.microworld.robots.intefaces.Driver;
-import org.microworld.utils.Point;
-
 import eu.fbk.dycapo.factories.json.DycapoObjectsFetcher;
 
 /**

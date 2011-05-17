@@ -29,6 +29,7 @@ import org.microworld.robots.BehavioralPatterns;
 import org.microworld.robots.DriverAgent;
 import org.microworld.robots.RiderAgent;
 import org.microworld.robots.Robot;
+import org.microworld.robots.Role;
 
 /**
  * @author riccardo
@@ -54,7 +55,7 @@ public class DriverTest {
 		Robot path = new Robot(
 				BehavioralPatterns
 						.getBehavioralPattern(BehavioralPatterns.STRAIGHT_LINE));
-		path.setRole(Robot.DRIVER);
+		path.setRole(Role.DRIVER);
 		driver.setPath(path);
 
 		Location origin = new Location();

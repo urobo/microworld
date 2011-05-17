@@ -14,6 +14,7 @@ import org.microworld.models.Trip;
 import org.microworld.robots.BehavioralPatterns;
 import org.microworld.robots.DriverAgent;
 import org.microworld.robots.Robot;
+import org.microworld.robots.Role;
 
 /**
  * @author riccardo
@@ -29,6 +30,7 @@ public class Scenario1 extends Scenario {
 	 * 
 	 * @see org.microworlds.scenario.DycapoScenario#setUp()
 	 */
+	@Override
 	public void setUp() {
 
 		Log.verbose("Scenario1 SetUp", "starting");
@@ -36,7 +38,7 @@ public class Scenario1 extends Scenario {
 		Robot path = new Robot(
 				BehavioralPatterns
 						.getBehavioralPattern(BehavioralPatterns.STRAIGHT_LINE));
-		path.setRole(Robot.DRIVER);
+		path.setRole(Role.DRIVER);
 		driver.setPath(path);
 
 		Location origin = new Location();
@@ -61,13 +63,14 @@ public class Scenario1 extends Scenario {
 		modality.setModel("M3");
 
 		Person person = new Person();
-		person.setUsername("django");
+		person.setUsername("mockuser1");
 		person.setPassword(LOGIN_PASSWORD);
 		person.setEmail("asd@asd.com");
 		person.setPhone("1223334444");
 		person.setGender(Person.MALE);
 		driver.setUser(person);
-
+		Log.verbose("Scenario1", person.toString());
+		
 		trip = new Trip();
 		trip.setAuthor(person);
 		trip.setDestination(destination);
