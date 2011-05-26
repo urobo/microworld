@@ -72,7 +72,7 @@ public class Point {
 		Location loc = new Location();
 		loc.setPoint(Location.POSI);
 		loc.setLeaves(new Date(System.currentTimeMillis()));
-		loc.setHref(GeoRSSPoint);
+		loc.setGeorss_point(GeoRSSPoint);
 		return loc;
 	}
 }
